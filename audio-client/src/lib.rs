@@ -47,10 +47,10 @@ impl Client {
 pub fn socket_path() -> PathBuf {
     dirs::runtime_dir()
         .expect("runtime dir required by varlink service")
-        .join("com.system76.CosmicSettings")
+        .join("fun.wmde.Settings")
 }
 
-#[zlink::proxy("com.system76.CosmicSettings.Audio")]
+#[zlink::proxy("fun.wmde.Settings.Audio")]
 pub trait CosmicAudioProxy {
     /// Request to listen to audio events through the returned `OwnedFd`.
     #[zlink(return_fds)]

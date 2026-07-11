@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use zlink::{ReplyError, introspect};
 
 #[derive(Debug, PartialEq, ReplyError, introspect::ReplyError)]
-#[zlink(interface = "com.system76.CosmicSettings.Audio")]
+#[zlink(interface = "fun.wmde.Settings.Audio")]
 pub enum Error {
     IO { code: Option<i32>, why: String },
     ChannelSend,

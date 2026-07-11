@@ -4,9 +4,9 @@
 //! Varlink frontend for cosmic-settings-daemon
 
 // TODO:
-// - com.system76.CosmicConfig config, set_config, watch_config, state, set_state, watch_state,
-// - com.system76.CosmicSettings.Display increase_brightness, decrease_brightness, set_brightness, recv_brightness,
-// - com.system76.CosmicSettings.Keyboard increase_brightness, decrease_brightness, set_brightness, recv_brightness,
+// - fun.wmde.Config config, set_config, watch_config, state, set_state, watch_state,
+// - fun.wmde.Settings.Display increase_brightness, decrease_brightness, set_brightness, recv_brightness,
+// - fun.wmde.Settings.Keyboard increase_brightness, decrease_brightness, set_brightness, recv_brightness,
 
 use cosmic_settings_audio_core as audio;
 use cosmic_settings_audio_server as audio_server;
@@ -26,7 +26,7 @@ pub async fn init() -> (Daemon, impl Future<Output = ()> + 'static + Send) {
 fn socket_path() -> PathBuf {
     dirs::runtime_dir()
         .expect("runtime dir required by varlink service")
-        .join("com.system76.CosmicSettings")
+        .join("fun.wmde.Settings")
 }
 
 pub struct Daemon(pub Arc<Mutex<DaemonInner>>);
@@ -44,13 +44,13 @@ impl Daemon {
     }
 }
 
-#[zlink::service(interface = "com.system76.CosmicSettings")]
+#[zlink::service(interface = "fun.wmde.Settings")]
 impl<Sock> Daemon
 where
     Sock::ReadHalf: zlink::connection::socket::FetchPeerCredentials,
 {
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "RecvEvents",
         return_fds
     )]
@@ -69,7 +69,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "DefaultSink"
     )]
     pub async fn audio_default_sink(&mut self) -> Result<audio::Node, audio::Error> {
@@ -83,7 +83,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "DefaultSource"
     )]
     pub async fn audio_default_source(&mut self) -> Result<audio::Node, audio::Error> {
@@ -97,7 +97,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SelectHeadphoneProfile"
     )]
     pub async fn audio_select_headphone_profile(
@@ -113,7 +113,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SelectHeadsetProfile"
     )]
     pub async fn audio_select_headset_profile(
@@ -129,7 +129,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SinkMuteToggle"
     )]
     pub async fn audio_sink_mute_toggle(&mut self) -> Result<audio::Mute, audio::Error> {
@@ -137,7 +137,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SinkVolumeLower"
     )]
     pub async fn audio_sink_volume_lower(
@@ -153,7 +153,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SinkVolumeRaise"
     )]
     pub async fn audio_sink_volume_raise(
@@ -169,7 +169,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SourceMuteToggle"
     )]
     pub async fn audio_source_mute_toggle(&mut self) -> Result<audio::Mute, audio::Error> {
@@ -177,7 +177,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SourceVolumeLower"
     )]
     pub async fn audio_source_volume_lower(
@@ -193,7 +193,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SourceVolumeRaise"
     )]
     pub async fn audio_source_volume_raise(
@@ -208,7 +208,7 @@ where
             .await
     }
 
-    #[zlink(interface = "com.system76.CosmicSettings.Audio", rename = "SetDefault")]
+    #[zlink(interface = "fun.wmde.Settings.Audio", rename = "SetDefault")]
     pub async fn audio_set_default(
         &mut self,
         node_id: u32,
@@ -222,7 +222,7 @@ where
             .await
     }
 
-    #[zlink(interface = "com.system76.CosmicSettings.Audio", rename = "SetProfile")]
+    #[zlink(interface = "fun.wmde.Settings.Audio", rename = "SetProfile")]
     pub async fn audio_set_profile(
         &mut self,
         device_id: u32,
@@ -237,7 +237,7 @@ where
             .await
     }
 
-    #[zlink(interface = "com.system76.CosmicSettings.Audio", rename = "SetRoute")]
+    #[zlink(interface = "fun.wmde.Settings.Audio", rename = "SetRoute")]
     pub async fn audio_set_route(
         &mut self,
         device_id: u32,
@@ -254,7 +254,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SetSinkVolume"
     )]
     pub async fn audio_set_sink_volume(
@@ -270,7 +270,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SetSourceVolume"
     )]
     pub async fn audio_set_source_volume(
@@ -286,7 +286,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SetNodeMute"
     )]
     pub async fn audio_set_node_mute(
@@ -303,7 +303,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SetNodeVolume"
     )]
     pub async fn audio_set_node_volume(
@@ -320,7 +320,7 @@ where
     }
 
     #[zlink(
-        interface = "com.system76.CosmicSettings.Audio",
+        interface = "fun.wmde.Settings.Audio",
         rename = "SetNodeVolumeBalance"
     )]
     pub async fn audio_set_node_volume_balance(

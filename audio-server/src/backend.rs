@@ -639,11 +639,11 @@ impl Model {
                             target: "audio-backend",
                             ?headphone_info,
                             ?headset_info,
-                            "cosmic-osd confirm-headphones {id}"
+                            "wmde-osd confirm-headphones {id}"
                         );
 
                         tokio::spawn(async move {
-                            _ = tokio::process::Command::new("cosmic-osd")
+                            _ = tokio::process::Command::new("wmde-osd")
                                 .arg("confirm-headphones")
                                 .arg("--device")
                                 .arg(numtoa::BaseN::<10>::u32(id).as_str())

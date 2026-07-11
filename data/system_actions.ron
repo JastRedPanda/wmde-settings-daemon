@@ -1,24 +1,22 @@
 {
-    /// Opens the application library
-    AppLibrary: "cosmic-app-library",
     /// Decreases screen brightness
-    BrightnessDown: "busctl --user call com.system76.CosmicSettingsDaemon /com/system76/CosmicSettingsDaemon com.system76.CosmicSettingsDaemon DecreaseDisplayBrightness",
+    BrightnessDown: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon DecreaseDisplayBrightness",
     /// Increases screen brightness
-    BrightnessUp: "busctl --user call com.system76.CosmicSettingsDaemon /com/system76/CosmicSettingsDaemon com.system76.CosmicSettingsDaemon IncreaseDisplayBrightness",
+    BrightnessUp: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon IncreaseDisplayBrightness",
     /// Toggles display mode
-    DisplayToggle: "cosmic-osd display",
+    DisplayToggle: "wmde-osd display",
     /// Switch between input sources
-    InputSourceSwitch: "busctl --user call com.system76.CosmicSettingsDaemon /com/system76/CosmicSettingsDaemon com.system76.CosmicSettingsDaemon InputSourceSwitch",
+    InputSourceSwitch: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon InputSourceSwitch",
     /// Opens the home folder in a system default file browser
     HomeFolder: "xdg-open ~",
     /// Logs out
-    LogOut: "cosmic-osd log-out",
+    LogOut: "wmde-osd log-out",
     /// Decreases keyboard brightness
     // KeyboardBrightnessDown,
     /// Increases keyboard brightness
     // KeyboardBrightnessUp,
     /// Opens the launcher
-    Launcher: "cosmic-launcher",
+    Launcher: "wmde-launcher",
     /// Locks the screen
     LockScreen: "loginctl lock-session",
     /// Mutes the active output device
@@ -32,27 +30,21 @@
     /// Goes to the previous track
     PlayPrev: "playerctl previous",
     /// Power off handler
-    PowerOff: "cosmic-osd shutdown",
-    /// Takes a screenshot
-    Screenshot: "cosmic-screenshot",
+    PowerOff: "wmde-osd shutdown",
     /// Suspend the system
     Suspend: "systemctl suspend",
     /// Toggles the screen reader
-    ScreenReader: "busctl --user call com.system76.CosmicSettingsDaemon /com/system76/CosmicSettingsDaemon com.system76.CosmicSettingsDaemon ScreenReader",
-    /// Opens the system default terminal
-    Terminal: "cosmic-term",
+    ScreenReader: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon ScreenReader",
     /// Toggles touchpad on/off
-    TouchpadToggle: "cosmic-osd touchpad",
+    TouchpadToggle: "wmde-osd touchpad",
     /// Lowers the volume of the active output device
-    VolumeLower: "busctl --user call com.system76.CosmicSettingsDaemon /com/system76/CosmicSettingsDaemon com.system76.CosmicSettingsDaemon VolumeDown",
+    VolumeLower: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon VolumeDown",
     /// Raises the volume of the active output device
-    VolumeRaise: "busctl --user call com.system76.CosmicSettingsDaemon /com/system76/CosmicSettingsDaemon com.system76.CosmicSettingsDaemon VolumeUp",
+    VolumeRaise: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon VolumeUp",
     /// Opens the system default web browser
     WebBrowser: "xdg-open http://",
     /// Opens the (alt+tab) window switcher
-    WindowSwitcher: "cosmic-launcher alt-tab",
+    WindowSwitcher: "wmde-launcher alt-tab",
     /// Opens the (alt+shift+tab) window switcher
-    WindowSwitcherPrevious: "cosmic-launcher shift-alt-tab",
-    /// Opens the workspace overview
-    WorkspaceOverview: "cosmic-workspaces",
+    WindowSwitcherPrevious: "wmde-launcher shift-alt-tab",
 }

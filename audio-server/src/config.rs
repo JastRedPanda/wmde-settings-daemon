@@ -1,6 +1,6 @@
 use cosmic_config::{Config as CosmicConfig, ConfigGet};
 
-const AUDIO_CONFIG: &str = "com.system76.CosmicAudio";
+const AUDIO_CONFIG: &str = "fun.wmde.Audio";
 const AMPLIFICATION_SINK: &str = "amplification_sink";
 
 pub async fn amplification_sink() -> bool {

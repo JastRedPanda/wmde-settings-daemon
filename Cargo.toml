@@ -1,5 +1,5 @@
 [package]
-name = "cosmic-settings-daemon"
+name = "wmde-settings-daemon"
 version = "0.1.0"
 edition = "2024"
 license = "GPL-3.0-or-later"
@@ -54,9 +54,19 @@ walkdir = "2.5.0"
 xkb-data = "0.2.1"
 zbus = { version = "5.11.0", default-features = false, features = ["tokio"] }
 
-# For development and testing purposes
-# [patch.'https://github.com/pop-os/libcosmic']
-# libcosmic = { git = "https://github.com/pop-os/libcosmic//" }
-# iced_futures = { git = "https://github.com/pop-os/libcosmic//" }
-# cosmic-config = { git = "https://github.com/pop-os/libcosmic//" }
-# cosmic-theme = { git = "https://github.com/pop-os/libcosmic//" }
+# Unify every libcosmic crate on the local WMDE fork. Patch BOTH pop-os URL
+# forms so transitively-pulled cosmic-config resolves to the same version as ours.
+[patch."https://github.com/pop-os/libcosmic"]
+libcosmic = { path = "../libcosmic" }
+cosmic-config = { path = "../libcosmic/cosmic-config" }
+cosmic-config-derive = { path = "../libcosmic/cosmic-config-derive" }
+cosmic-theme = { path = "../libcosmic/cosmic-theme" }
+
+[patch."https://github.com/pop-os/libcosmic.git"]
+libcosmic = { path = "../libcosmic" }
+cosmic-config = { path = "../libcosmic/cosmic-config" }
+cosmic-config-derive = { path = "../libcosmic/cosmic-config-derive" }
+cosmic-theme = { path = "../libcosmic/cosmic-theme" }
+
+[patch."https://github.com/pop-os/cosmic-comp"]
+cosmic-comp-config = { path = "../wmde-comp/cosmic-comp-config" }

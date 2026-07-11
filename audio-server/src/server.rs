@@ -1,7 +1,7 @@
 // Copyright 2026 System76 <info@system76.com>
 // SPDX-License-Identifier: GPL-3.0-only
 
-//! Interfaces for implementing the varlink methods for `com.system76.CosmicSettings.Audio`.
+//! Interfaces for implementing the varlink methods for `fun.wmde.Settings.Audio`.
 
 use cosmic_settings_audio_core::{Error, Mute, Node, Volume};
 use std::{os::fd::OwnedFd, sync::Arc};

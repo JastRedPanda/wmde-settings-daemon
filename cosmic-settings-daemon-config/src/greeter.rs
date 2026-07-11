@@ -18,7 +18,7 @@ pub struct GreeterAccessibilityState {
 
 impl GreeterAccessibilityState {
     pub fn path() -> PathBuf {
-        PathBuf::from(GREETER_STATE.unwrap_or("/run/cosmic-greeter"))
+        PathBuf::from(GREETER_STATE.unwrap_or("/run/wmde-greeter"))
     }
 
     pub fn config() -> Result<Config, cosmic_config::Error> {

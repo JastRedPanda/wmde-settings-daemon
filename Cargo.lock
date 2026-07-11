@@ -830,7 +830,6 @@ dependencies = [
 [[package]]
 name = "cosmic-comp-config"
 version = "1.0.0"
-source = "git+https://github.com/pop-os/cosmic-comp#b5186ef21a74f9399714d2bac03ca016cd5820b2"
 dependencies = [
  "cosmic-config",
  "input",
@@ -840,11 +839,10 @@ dependencies = [
 [[package]]
 name = "cosmic-config"
 version = "1.0.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "atomicwrites",
  "cosmic-config-derive",
- "cosmic-settings-daemon 0.1.0 (git+https://github.com/pop-os/dbus-settings-bindings)",
+ "cosmic-settings-daemon",
  "dirs",
  "futures-util",
  "iced_futures",
@@ -860,7 +858,6 @@ dependencies = [
 [[package]]
 name = "cosmic-config-derive"
 version = "1.0.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "quote",
  "syn 2.0.117",
@@ -964,44 +961,6 @@ dependencies = [
 [[package]]
 name = "cosmic-settings-daemon"
 version = "0.1.0"
-dependencies = [
- "acpid_plug",
- "anyhow",
- "chrono",
- "cosmic-comp-config",
- "cosmic-config",
- "cosmic-dbus-a11y",
- "cosmic-settings-audio-server",
- "cosmic-settings-daemon-config",
- "cosmic-settings-varlink-server",
- "cosmic-theme",
- "ddc-hi",
- "dirs",
- "futures",
- "futures-util",
- "geonames",
- "libcosmic",
- "locale1",
- "log",
- "memoize",
- "notify",
- "notify-rust",
- "serde",
- "sunrise",
- "tokio",
- "tokio-stream",
- "tracing",
- "tracing-subscriber",
- "udev 0.9.3",
- "upower_dbus",
- "walkdir",
- "xkb-data",
- "zbus",
-]
-
-[[package]]
-name = "cosmic-settings-daemon"
-version = "0.1.0"
 source = "git+https://github.com/pop-os/dbus-settings-bindings#507e342c21d3ce6ae41b1d4f3fa2f0ad5ee23e75"
 dependencies = [
  "zbus",
@@ -1057,7 +1016,6 @@ dependencies = [
 [[package]]
 name = "cosmic-theme"
 version = "1.0.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "almost",
  "configparser",
@@ -2420,7 +2378,6 @@ dependencies = [
 [[package]]
 name = "iced"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "dnd",
  "iced_core",
@@ -2439,7 +2396,6 @@ dependencies = [
 [[package]]
 name = "iced_core"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "bitflags 2.11.1",
  "bytes",
@@ -2455,6 +2411,7 @@ dependencies = [
  "serde",
  "smol_str",
  "thiserror 2.0.18",
+ "unicode-segmentation",
  "web-time",
  "window_clipboard",
 ]
@@ -2462,7 +2419,6 @@ dependencies = [
 [[package]]
 name = "iced_debug"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "iced_core",
  "iced_futures",
@@ -2472,7 +2428,6 @@ dependencies = [
 [[package]]
 name = "iced_futures"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "futures",
  "iced_core",
@@ -2485,7 +2440,6 @@ dependencies = [
 [[package]]
 name = "iced_graphics"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "bitflags 2.11.1",
  "bytemuck",
@@ -2506,7 +2460,6 @@ dependencies = [
 [[package]]
 name = "iced_program"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "iced_graphics",
  "iced_runtime",
@@ -2515,7 +2468,6 @@ dependencies = [
 [[package]]
 name = "iced_renderer"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "iced_graphics",
  "iced_tiny_skia",
@@ -2527,7 +2479,6 @@ dependencies = [
 [[package]]
 name = "iced_runtime"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "bytes",
  "dnd",
@@ -2541,7 +2492,6 @@ dependencies = [
 [[package]]
 name = "iced_tiny_skia"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "bytemuck",
  "cosmic-text",
@@ -2558,7 +2508,6 @@ dependencies = [
 [[package]]
 name = "iced_wgpu"
 version = "0.14.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "as-raw-xcb-connection",
  "bitflags 2.11.1",
@@ -2588,7 +2537,6 @@ dependencies = [
 [[package]]
 name = "iced_widget"
 version = "0.14.2"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "dnd",
  "iced_renderer",
@@ -3035,13 +2983,12 @@ checksum = "68ab91017fe16c622486840e4c83c9a37afeff978bd239b5293d61ece587de66"
 [[package]]
 name = "libcosmic"
 version = "1.0.0"
-source = "git+https://github.com/pop-os/libcosmic#6f863f19052f1ac576d1a9bef2897d14b29b3f7d"
 dependencies = [
  "apply",
  "auto_enums",
  "cosmic-config",
  "cosmic-freedesktop-icons",
- "cosmic-settings-daemon 0.1.0 (git+https://github.com/pop-os/dbus-settings-bindings)",
+ "cosmic-settings-daemon",
  "cosmic-theme",
  "css-color",
  "derive_setters",
@@ -6778,6 +6725,44 @@ dependencies = [
  "serde_json",
  "unicode-xid",
  "wasmparser",
+]
+
+[[package]]
+name = "wmde-settings-daemon"
+version = "0.1.0"
+dependencies = [
+ "acpid_plug",
+ "anyhow",
+ "chrono",
+ "cosmic-comp-config",
+ "cosmic-config",
+ "cosmic-dbus-a11y",
+ "cosmic-settings-audio-server",
+ "cosmic-settings-daemon-config",
+ "cosmic-settings-varlink-server",
+ "cosmic-theme",
+ "ddc-hi",
+ "dirs",
+ "futures",
+ "futures-util",
+ "geonames",
+ "libcosmic",
+ "locale1",
+ "log",
+ "memoize",
+ "notify",
+ "notify-rust",
+ "serde",
+ "sunrise",
+ "tokio",
+ "tokio-stream",
+ "tracing",
+ "tracing-subscriber",
+ "udev 0.9.3",
+ "upower_dbus",
+ "walkdir",
+ "xkb-data",
+ "zbus",
 ]
 
 [[package]]
