@@ -23,6 +23,11 @@ depends=('glibc' 'gcc-libs' 'pipewire' 'libpulse' 'libxkbcommon'
          'systemd-libs' 'dbus' 'ddcutil')
 makedepends=('rust' 'cargo' 'git' 'make' 'clang' 'lld' 'pkgconf'
              'pipewire' 'libxkbcommon' 'systemd')
+# !lto: makepkg's LTO option injects -flto into CFLAGS, which the cc crate uses
+# to build libspa-sys's C shim (static_fns.c) as a GCC LTO bitcode-only object.
+# ld.lld cannot read that bitcode, so the *_libspa_rs shim wrappers end up as
+# undefined symbols at final link. Disabling LTO keeps the shim native + linkable.
+options=('!lto')
 optdepends=('polkit: privileged locale/keyboard changes'
             'geoclue: automatic timezone and night-light location'
             'wmde-osd: headphone-confirmation and OSD prompts')
