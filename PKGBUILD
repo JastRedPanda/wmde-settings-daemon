@@ -11,7 +11,7 @@
 # cosmic-pipewire, varlink-server) - they are consumed only in-tree here.
 pkgname=wmde-settings-daemon
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="WMDE settings daemon (fork of cosmic-settings-daemon) - owns fun.wmde.SettingsDaemon"
 arch=('x86_64')
 url="https://wmde.fun"

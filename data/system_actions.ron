@@ -15,8 +15,6 @@
     // KeyboardBrightnessDown,
     /// Increases keyboard brightness
     // KeyboardBrightnessUp,
-    /// Opens the launcher
-    Launcher: "wmde-launcher",
     /// Locks the screen
     LockScreen: "loginctl lock-session",
     /// Mutes the active output device
@@ -43,8 +41,4 @@
     VolumeRaise: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon VolumeUp",
     /// Opens the system default web browser
     WebBrowser: "xdg-open http://",
-    /// Opens the (alt+tab) window switcher
-    WindowSwitcher: "wmde-launcher alt-tab",
-    /// Opens the (alt+shift+tab) window switcher
-    WindowSwitcherPrevious: "wmde-launcher shift-alt-tab",
 }
