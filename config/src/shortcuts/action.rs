@@ -18,6 +18,12 @@ pub enum Action {
     /// Change focus to the window or workspace in the given direction
     Focus(FocusDirection),
 
+    /// Change focus to the next window in the active workspace (native alt-tab)
+    NextWindow,
+
+    /// Change focus to the previous window in the active workspace (native shift-alt-tab)
+    PrevWindow,
+
     /// Change focus to the last workspace
     LastWorkspace,
 
