@@ -9,6 +9,8 @@
     InputSourceSwitch: "busctl --user call fun.wmde.SettingsDaemon /fun/wmde/SettingsDaemon fun.wmde.SettingsDaemon InputSourceSwitch",
     /// Opens the home folder in a system default file browser
     HomeFolder: "xdg-open ~",
+    /// Opens the system default terminal
+    Terminal: "wmde-term",
     /// Logs out
     LogOut: "wmde-osd log-out",
     /// Decreases keyboard brightness
