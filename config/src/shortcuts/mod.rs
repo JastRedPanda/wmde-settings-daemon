@@ -8,15 +8,14 @@ pub mod modifier;
 pub use modifier::{Modifier, Modifiers, ModifiersDef};
 
 mod binding;
-pub use binding::{is_forbidden_unmodified_keysym, Binding};
+pub use binding::{Binding, is_forbidden_unmodified_keysym};
 
 pub mod sym;
 
 use cosmic_config::cosmic_config_derive::CosmicConfigEntry;
 use cosmic_config::{ConfigGet, CosmicConfigEntry};
 use serde::{Deserialize, Serialize};
-use std::collections::BTreeMap;
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use xkbcommon::xkb;
 
 pub const ID: &str = "fun.wmde.Settings.Shortcuts";
@@ -170,9 +169,7 @@ impl Shortcuts {
                     keycode: None,
                     key: Some(key),
                 };
-                if !self.0.contains_key(&pattern) {
-                    self.0.insert(pattern, action.clone());
-                }
+                self.0.entry(pattern).or_insert(action.clone());
             }
             for key in keycodes {
                 let pattern = Binding {
@@ -181,9 +178,7 @@ impl Shortcuts {
                     keycode: Some(key.raw()),
                     key: None,
                 };
-                if !self.0.contains_key(&pattern) {
-                    self.0.insert(pattern, action.clone());
-                }
+                self.0.entry(pattern).or_insert(action.clone());
             }
         }
     }

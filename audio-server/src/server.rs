@@ -4,7 +4,8 @@
 //! Interfaces for implementing the varlink methods for `fun.wmde.Settings.Audio`.
 
 use cosmic_settings_audio_core::{Error, Mute, Node, Volume};
-use std::{os::fd::OwnedFd, sync::Arc};
+use std::os::fd::OwnedFd;
+use std::sync::Arc;
 
 use crate::{config, context};
 
@@ -124,7 +125,8 @@ impl Server {
         set_node_mute(&mut model, node_id, mute)
     }
 
-    pub async fn source_volume_lower(&mut self, step: u32) -> Result<Volume, Error> {
+    pub async fn source_volume_lower(&mut self) -> Result<Volume, Error> {
+        let step = config::volume_step().await;
         let mut model = self.backend.model.lock().await;
         let Some(id) = model.active_source_node else {
             return Err(Error::NoActiveSource);
@@ -142,7 +144,8 @@ impl Server {
         set_node_volume(&mut model, id, volume, None)
     }
 
-    pub async fn source_volume_raise(&mut self, step: u32) -> Result<Volume, Error> {
+    pub async fn source_volume_raise(&mut self) -> Result<Volume, Error> {
+        let step = config::volume_step().await;
         let mut model = self.backend.model.lock().await;
         let Some(id) = model.active_source_node else {
             return Err(Error::NoActiveSource);
@@ -170,7 +173,8 @@ impl Server {
         set_node_mute(&mut model, node_id, mute)
     }
 
-    pub async fn sink_volume_lower(&mut self, step: u32) -> Result<Volume, Error> {
+    pub async fn sink_volume_lower(&mut self) -> Result<Volume, Error> {
+        let step = config::volume_step().await;
         let mut model = self.backend.model.lock().await;
         let Some(id) = model.active_sink_node else {
             return Err(Error::NoActiveSink);
@@ -189,12 +193,13 @@ impl Server {
         set_node_volume(&mut model, id, volume, balance)
     }
 
-    pub async fn sink_volume_raise(&mut self, step: u32) -> Result<Volume, Error> {
+    pub async fn sink_volume_raise(&mut self) -> Result<Volume, Error> {
         let max_volume = if config::amplification_sink().await {
             150
         } else {
             100
         };
+        let step = config::volume_step().await;
         let mut model = self.backend.model.lock().await;
         let Some(id) = model.active_sink_node else {
             return Err(Error::NoActiveSink);

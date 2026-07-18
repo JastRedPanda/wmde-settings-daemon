@@ -10,7 +10,9 @@
 
 use cosmic_settings_audio_core as audio;
 use cosmic_settings_audio_server as audio_server;
-use std::{os::fd::OwnedFd, path::PathBuf, sync::Arc};
+use std::os::fd::OwnedFd;
+use std::path::PathBuf;
+use std::sync::Arc;
 use tokio::sync::Mutex;
 
 pub async fn init() -> (Daemon, impl Future<Output = ()> + 'static + Send) {
@@ -140,32 +142,16 @@ where
         interface = "fun.wmde.Settings.Audio",
         rename = "SinkVolumeLower"
     )]
-    pub async fn audio_sink_volume_lower(
-        &mut self,
-        step: u32,
-    ) -> Result<audio::Volume, audio::Error> {
-        self.0
-            .lock()
-            .await
-            .audio_server
-            .sink_volume_lower(step)
-            .await
+    pub async fn audio_sink_volume_lower(&mut self) -> Result<audio::Volume, audio::Error> {
+        self.0.lock().await.audio_server.sink_volume_lower().await
     }
 
     #[zlink(
         interface = "fun.wmde.Settings.Audio",
         rename = "SinkVolumeRaise"
     )]
-    pub async fn audio_sink_volume_raise(
-        &mut self,
-        step: u32,
-    ) -> Result<audio::Volume, audio::Error> {
-        self.0
-            .lock()
-            .await
-            .audio_server
-            .sink_volume_raise(step)
-            .await
+    pub async fn audio_sink_volume_raise(&mut self) -> Result<audio::Volume, audio::Error> {
+        self.0.lock().await.audio_server.sink_volume_raise().await
     }
 
     #[zlink(
@@ -180,32 +166,16 @@ where
         interface = "fun.wmde.Settings.Audio",
         rename = "SourceVolumeLower"
     )]
-    pub async fn audio_source_volume_lower(
-        &mut self,
-        step: u32,
-    ) -> Result<audio::Volume, audio::Error> {
-        self.0
-            .lock()
-            .await
-            .audio_server
-            .source_volume_lower(step)
-            .await
+    pub async fn audio_source_volume_lower(&mut self) -> Result<audio::Volume, audio::Error> {
+        self.0.lock().await.audio_server.source_volume_lower().await
     }
 
     #[zlink(
         interface = "fun.wmde.Settings.Audio",
         rename = "SourceVolumeRaise"
     )]
-    pub async fn audio_source_volume_raise(
-        &mut self,
-        step: u32,
-    ) -> Result<audio::Volume, audio::Error> {
-        self.0
-            .lock()
-            .await
-            .audio_server
-            .source_volume_raise(step)
-            .await
+    pub async fn audio_source_volume_raise(&mut self) -> Result<audio::Volume, audio::Error> {
+        self.0.lock().await.audio_server.source_volume_raise().await
     }
 
     #[zlink(interface = "fun.wmde.Settings.Audio", rename = "SetDefault")]
