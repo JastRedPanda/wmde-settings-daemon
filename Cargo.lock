@@ -473,6 +473,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "build_helpers"
+version = "0.14.0"
+dependencies = [
+ "cfg_aliases",
+]
+
+[[package]]
 name = "bumpalo"
 version = "3.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2389,6 +2396,7 @@ dependencies = [
 name = "iced"
 version = "0.14.0"
 dependencies = [
+ "build_helpers",
  "dnd",
  "iced_core",
  "iced_debug",
@@ -2408,6 +2416,7 @@ name = "iced_core"
 version = "0.14.0"
 dependencies = [
  "bitflags 2.11.1",
+ "build_helpers",
  "bytes",
  "dnd",
  "glam 0.25.0",
@@ -2490,6 +2499,7 @@ dependencies = [
 name = "iced_runtime"
 version = "0.14.0"
 dependencies = [
+ "build_helpers",
  "bytes",
  "dnd",
  "iced_core",
@@ -2521,6 +2531,7 @@ version = "0.14.0"
 dependencies = [
  "as-raw-xcb-connection",
  "bitflags 2.11.1",
+ "build_helpers",
  "bytemuck",
  "cryoglyph",
  "futures",
@@ -2548,6 +2559,7 @@ dependencies = [
 name = "iced_widget"
 version = "0.14.2"
 dependencies = [
+ "build_helpers",
  "dnd",
  "iced_renderer",
  "iced_runtime",
@@ -2996,6 +3008,7 @@ version = "1.0.0"
 dependencies = [
  "apply",
  "auto_enums",
+ "build_helpers",
  "cosmic-config",
  "cosmic-freedesktop-icons",
  "cosmic-settings-daemon",
