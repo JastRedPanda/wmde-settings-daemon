@@ -189,7 +189,7 @@ pub async fn watch_theme(
         if !theme_mode.auto_switch {
             let t = if theme_mode.is_dark { dark } else { light };
             if let Err(err) = t.apply_exports() {
-                log::error!("Failed to apply COSMIC theme exports. {err:?}");
+                log::error!("Failed to apply WMDE theme exports. {err:?}");
             }
         }
 
@@ -276,7 +276,7 @@ pub async fn watch_theme(
                             };
 
                             if let Err(err) = theme.apply_exports() {
-                                log::error!("Failed to apply COSMIC theme exports. {err:?}");
+                                log::error!("Failed to apply WMDE theme exports. {err:?}");
                             }
 
                             set_gnome_desktop_interface(theme_mode.is_dark);
@@ -327,7 +327,7 @@ pub async fn watch_theme(
 
                             let t = if theme_mode.is_dark { dark } else { light };
                             if let Err(err) = t.apply_exports() {
-                                log::error!("Failed to apply COSMIC theme exports. {err:?}");
+                                log::error!("Failed to apply WMDE theme exports. {err:?}");
                             }
 
                             set_gnome_desktop_interface(theme_mode.is_dark);
@@ -351,7 +351,7 @@ pub async fn watch_theme(
                             };
                         if tk.apply_theme_global {
                             if let Err(err) = t.write_exports() {
-                                log::error!("Failed to write COSMIC theme exports. {err:?}");
+                                log::error!("Failed to write WMDE theme exports. {err:?}");
                             }
                             let theme_mode = match ThemeMode::get_entry(&helper) {
                                 Ok(t) => t,
@@ -364,7 +364,7 @@ pub async fn watch_theme(
                             };
                             if theme_mode.is_dark == is_dark
                                 && let Err(err) = t.apply_exports() {
-                                    log::error!("Failed to apply COSMIC theme exports. {err:?}");
+                                    log::error!("Failed to apply WMDE theme exports. {err:?}");
                                 }
 
                             set_gnome_desktop_interface(theme_mode.is_dark);
@@ -402,7 +402,7 @@ pub async fn watch_theme(
                         }
                     };
                     if let Err(err) = theme.apply_exports() {
-                        log::error!("Failed to apply COSMIC theme exports. {err:?}");
+                        log::error!("Failed to apply WMDE theme exports. {err:?}");
                     }
 
                     set_gnome_desktop_interface(theme_mode.is_dark);
@@ -465,7 +465,7 @@ pub async fn watch_theme(
                         }
                     };
                     if let Err(err) = theme.apply_exports() {
-                        log::error!("Failed to apply COSMIC theme exports. {err:?}");
+                        log::error!("Failed to apply WMDE theme exports. {err:?}");
                     }
 
                     set_gnome_desktop_interface(theme_mode.is_dark);
