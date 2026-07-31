@@ -73,12 +73,6 @@ cosmic-config = { path = "../libcosmic/cosmic-config" }
 cosmic-config-derive = { path = "../libcosmic/cosmic-config-derive" }
 cosmic-theme = { path = "../libcosmic/cosmic-theme" }
 
-[patch."https://github.com/pop-os/libcosmic.git"]
-libcosmic = { path = "../libcosmic" }
-cosmic-config = { path = "../libcosmic/cosmic-config" }
-cosmic-config-derive = { path = "../libcosmic/cosmic-config-derive" }
-cosmic-theme = { path = "../libcosmic/cosmic-theme" }
-
 [patch."https://github.com/pop-os/cosmic-comp"]
 cosmic-comp-config = { path = "../wmde-comp/cosmic-comp-config" }
 
