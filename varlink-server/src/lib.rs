@@ -72,6 +72,25 @@ where
 
     #[zlink(
         interface = "fun.wmde.Settings.Audio",
+        rename = "RecvEventsV2",
+        return_fds
+    )]
+    pub async fn audio_recv_events_v2(&mut self) -> (Result<(), audio::Error>, Vec<OwnedFd>) {
+        let mut fds = Vec::new();
+        let mut this = self.0.lock().await;
+        let reply = match this.audio_server.recv_events_v2().await {
+            Ok(fd) => {
+                fds.push(fd);
+                Ok(())
+            }
+            Err(why) => Err(why),
+        };
+
+        (reply, fds)
+    }
+
+    #[zlink(
+        interface = "fun.wmde.Settings.Audio",
         rename = "DefaultSink"
     )]
     pub async fn audio_default_sink(&mut self) -> Result<audio::Node, audio::Error> {
@@ -303,6 +322,23 @@ where
             .await
             .audio_server
             .set_node_volume_balance(node_id, balance)
+            .await
+    }
+
+    #[zlink(
+        interface = "fun.wmde.Settings.Audio",
+        rename = "SetPlaybackSink"
+    )]
+    pub async fn audio_set_playback_sink(
+        &mut self,
+        playback_id: u32,
+        sink_id: u32,
+    ) -> Result<(), audio::Error> {
+        self.0
+            .lock()
+            .await
+            .audio_server
+            .set_playback_sink(playback_id, sink_id)
             .await
     }
 }

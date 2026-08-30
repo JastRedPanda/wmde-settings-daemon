@@ -37,6 +37,7 @@ mod logind_session;
 mod pipewire;
 mod theme;
 mod time;
+mod utils;
 mod wayland;
 
 // Use seperate HasDisplayBrightness, or -1?
@@ -55,9 +56,11 @@ struct SettingsDaemon {
     logind_session: Option<LogindSessionProxy<'static>>,
     a11y_session: Option<Mutex<cosmic_dbus_a11y::StatusProxy<'static>>>,
     display_brightness_device: BrightnessDevice,
+    #[allow(clippy::type_complexity)]
     watched_configs: Arc<
         RwLock<HashMap<(String, u64), (Connection, ObjectPath<'static>, WellKnownName<'static>)>>,
     >,
+    #[allow(clippy::type_complexity)]
     watched_states: Arc<
         RwLock<HashMap<(String, u64), (Connection, ObjectPath<'static>, WellKnownName<'static>)>>,
     >,
@@ -197,6 +200,10 @@ impl SettingsDaemon {
             // Align with slider behavior and device clamp: floor at 1 for backlight
             let max = self.display_brightness_device.max_brightness();
             let min = self.display_brightness_device.min_brightness() as i32;
+
+            if min > max {
+                return;
+            }
 
             let clamped = value.clamp(min, max);
             _ = self
@@ -627,7 +634,7 @@ async fn main() -> ExitCode {
                 backlight_monitor_task(backlights, conn_clone).await;
             });
 
-            tokio::task::spawn_local(battery::monitor());
+            tokio::task::spawn_local(battery::low_power_monitor());
 
             let conn_clone = connection.clone();
             task::spawn_local(async move {
