@@ -158,6 +158,8 @@ pub async fn watch_theme(
 
     set_gnome_button_layout(tk.show_maximize, tk.show_minimize);
     set_gnome_icon_theme(tk.icon_theme.clone());
+    set_gnome_font_name(tk.interface_font.family.clone());
+    set_gnome_monospace_font_name(tk.monospace_font.family.clone());
 
     let light_helper = CosmicTheme::light_config()?;
     let dark_helper = CosmicTheme::dark_config()?;
@@ -291,6 +293,14 @@ pub async fn watch_theme(
 
                         if changes.contains(&"icon_theme") {
                             set_gnome_icon_theme(tk.icon_theme.clone());
+                        }
+
+                        if changes.contains(&"interface_font") {
+                            set_gnome_font_name(tk.interface_font.family.clone());
+                        }
+
+                        if changes.contains(&"monospace_font") {
+                            set_gnome_monospace_font_name(tk.monospace_font.family.clone());
                         }
 
                         if changes.contains(&"show_maximize") || changes.contains(&"show_minimize") {
@@ -606,6 +616,34 @@ fn set_gnome_icon_theme(theme: String) {
                 "org.gnome.desktop.interface",
                 "icon-theme",
                 theme.as_str(),
+            ])
+            .status()
+            .await;
+    });
+}
+
+fn set_gnome_font_name(font_name: String) {
+    tokio::spawn(async move {
+        let _res = tokio::process::Command::new("gsettings")
+            .args([
+                "set",
+                "org.gnome.desktop.interface",
+                "font-name",
+                font_name.as_str(),
+            ])
+            .status()
+            .await;
+    });
+}
+
+fn set_gnome_monospace_font_name(font_name: String) {
+    tokio::spawn(async move {
+        let _res = tokio::process::Command::new("gsettings")
+            .args([
+                "set",
+                "org.gnome.desktop.interface",
+                "monospace-font-name",
+                font_name.as_str(),
             ])
             .status()
             .await;
