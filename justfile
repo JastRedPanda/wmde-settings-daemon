@@ -1,4 +1,4 @@
-name := 'cosmic-settings-daemon'
+name := 'wmde-settings-daemon'
 rootdir := ''
 prefix := '/usr'
 profile := 'release'
@@ -8,8 +8,8 @@ mod cargo 'cargo.just'
 
 base-dir := absolute_path(clean(rootdir / prefix))
 bin-dst := base-dir / 'bin' / name
-system-actions-conf := base-dir / 'share/cosmic/com.system76.CosmicSettings.Shortcuts/v1/system_actions'
-polkit-rule := base-dir / 'share/polkit-1/rules.d/cosmic-settings-daemon.rules'
+system-actions-conf := base-dir / 'share/wmde/fun.wmde.Settings.Shortcuts/v1/system_actions'
+polkit-rule := base-dir / 'share/polkit-1/rules.d/wmde-settings-daemon.rules'
 
 # Compile with release profile by default
 default: build-release
@@ -33,7 +33,7 @@ clean-dist: cargo::clean-dist
 install:
     install -Dm0755 '{{ cargo-target-dir / profile / name }}' '{{ bin-dst }}'
     install -Dm0644 data/system_actions.ron '{{ system-actions-conf }}'
-    install -Dm0644 data/polkit-1/rules.d/cosmic-settings-daemon.rules '{{ polkit-rule }}'
+    install -Dm0644 data/polkit-1/rules.d/wmde-settings-daemon.rules '{{ polkit-rule }}'
 
 # Vendor Cargo dependencies locally
 vendor: cargo::vendor

@@ -21,7 +21,7 @@ license=('GPL-3.0-or-later')
 # ddcutil (external monitor brightness via ddc-hi). Verify with namcap after build.
 depends=('glibc' 'gcc-libs' 'pipewire' 'libpulse' 'libxkbcommon'
          'systemd-libs' 'dbus' 'ddcutil')
-makedepends=('rust' 'cargo' 'git' 'make' 'clang' 'lld' 'pkgconf'
+makedepends=('rust' 'cargo' 'git' 'just' 'clang' 'lld' 'pkgconf'
              'pipewire' 'libxkbcommon' 'systemd')
 # !lto: makepkg's LTO option injects -flto into CFLAGS, which the cc crate uses
 # to build libspa-sys's C shim (static_fns.c) as a GCC LTO bitcode-only object.
@@ -50,7 +50,7 @@ build() {
   cd "$srcdir/$pkgname"
   # x86-64-v3 (AVX2/BMI2) baseline for the WMDE repo; runs on Haswell+ (and the VM).
   export RUSTFLAGS="${RUSTFLAGS:+$RUSTFLAGS }-C target-cpu=x86-64-v3"
-  make
+  just build-release --bin wmde-settings-daemon
 }
 
 package() {
@@ -58,6 +58,6 @@ package() {
   # installs /usr/bin/wmde-settings-daemon, the system_actions defaults under
   # /usr/share/wmde/fun.wmde.Settings.Shortcuts/v1/ and the polkit rule
   # /usr/share/polkit-1/rules.d/wmde-settings-daemon.rules .
-  make DESTDIR="$pkgdir" prefix=/usr install
+  just rootdir="$pkgdir" prefix=/usr install
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
