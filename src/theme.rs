@@ -663,7 +663,10 @@ async fn get_gnome_font_size(key: &str) -> String {
 }
 
 fn font_description_size(description: &str) -> Option<&str> {
-    let (_, size) = description.trim().rsplit_once(' ')?;
+    // WMDE: `gsettings get` prints the value as a quoted GVariant ('Noto Sans 11'), so without
+    // the quotes stripped the size never parsed and the fallback always overwrote it.
+    let description = description.trim().trim_matches(|c| c == '\'' || c == '"');
+    let (_, size) = description.rsplit_once(' ')?;
     let number = size.strip_suffix("px").unwrap_or(size);
     let value: f64 = number.parse().ok()?;
 
@@ -693,4 +696,18 @@ fn set_flatpak_overrides() {
                 .await;
         }
     });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::font_description_size;
+
+    #[test]
+    fn the_size_is_read_from_what_gsettings_prints() {
+        assert_eq!(font_description_size("'Noto Sans 11'\n"), Some("11"));
+        assert_eq!(font_description_size("'Noto Sans Mono 10.5'"), Some("10.5"));
+        assert_eq!(font_description_size("Noto Sans 14px"), Some("14px"));
+        assert_eq!(font_description_size("'Noto Sans'"), None);
+        assert_eq!(font_description_size("''"), None);
+    }
 }
