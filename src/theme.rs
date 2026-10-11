@@ -656,9 +656,9 @@ async fn get_gnome_font_size(key: &str) -> String {
     current
         .as_deref()
         .and_then(font_description_size)
-        // Fallback to default COSMIC text/interface font size (14px) converted
-        // to Pango points at 96 DPI.
-        .unwrap_or("10.5")
+        // WMDE: fall back to the stack's interface text size, 12px, which is 9pt at 96 DPI
+        // (upstream falls back to COSMIC's 14px, 10.5pt).
+        .unwrap_or("9")
         .to_owned()
 }
 
